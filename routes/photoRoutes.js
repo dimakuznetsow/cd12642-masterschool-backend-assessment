@@ -1,0 +1,12 @@
+const express = require("express");
+const { getPhotos, getPhotoById } = require("../controllers/photoController");
+
+const router = express.Router();
+
+// route to return all photos
+router.get("/api/photos", getPhotos);
+
+// route to return a single photo by id
+router.get("/api/photos/:id", getPhotoById);
+
+module.exports = router;

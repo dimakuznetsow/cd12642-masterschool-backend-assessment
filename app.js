@@ -2,6 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 
+const photoRoutes = require("./routes/photoRoutes");
+
 // express app
 const app = express();
 
@@ -10,11 +12,14 @@ const port = process.env.PORT || 3003;
 
 // middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// route
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "Welcome to the Unsplash API!" });
-});
+// routes
+app.use("/", photoRoutes);
+
+// app.get("/", (req, res) => {
+//   res.status(200).json({ message: "Welcome to the Unsplash API!" });
+// });
 
 // server configuration
 app.listen(process.env.PORT, () => {
