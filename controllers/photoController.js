@@ -32,7 +32,32 @@ const getPhotoById = async (req, res) => {
   }
 };
 
+// get an array of photos by username
+const getPhotosByUser = async (req, res) => {
+  const { username } = req.params;
+  try {
+    const response = await axios.get(
+      `${apiUrl}/users/${username}?client_id=${accessKey}`
+    );
+    const data = response.data;
+
+    const photosArray = data.photos.map((photo) => {
+      return {
+        id: photo.id,
+        username: data.username,
+        description: photo.description || "No description provided.",
+        url: photo.urls.raw,
+      };
+    });
+
+    res.status(200).json(photosArray);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getPhotos,
   getPhotoById,
+  getPhotosByUser,
 };
