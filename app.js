@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const photoRoutes = require("./routes/photoRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 // express app
 const app = express();
@@ -16,11 +17,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Welcome to the Unsplash API!" });
+});
 app.use("/", photoRoutes);
-
-// app.get("/", (req, res) => {
-//   res.status(200).json({ message: "Welcome to the Unsplash API!" });
-// });
+app.use("/api/user/", userRoutes);
 
 // server configuration
 app.listen(process.env.PORT, () => {
