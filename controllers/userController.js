@@ -11,7 +11,7 @@ const createToken = (_id) => {
 };
 
 // signup user
-const signupUser = async (req, res) => {
+const signupUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
@@ -22,10 +22,10 @@ const signupUser = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-};
+});
 
 // login user
-const loginUser = async (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -36,16 +36,16 @@ const loginUser = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-};
+});
 
 // me router
-const getMe = async (req, res) => {
+const getMe = asyncHandler(async (req, res) => {
   try {
     res.status(200).json(req.user);
   } catch (error) {
     res.json({ message: error });
   }
-};
+});
 
 module.exports = {
   loginUser,

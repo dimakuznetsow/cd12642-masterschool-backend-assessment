@@ -15,7 +15,7 @@ const verifyToken = async (req, res, next) => {
     : null;
 
   if (!token) {
-    return res.status(401).json({ message: "No token provided" });
+    return res.status(401).json({ message: "Invalid token provided" });
   }
 
   try {
