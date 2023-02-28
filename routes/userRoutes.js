@@ -5,6 +5,8 @@ const {
   signupUser,
   getMe,
 } = require("../controllers/userController");
+
+// middleware to authenticate a route. If user is not authenticated, request will not proceed
 const { verifyToken } = require("../middleware/authMiddleware");
 
 const router = express.Router();

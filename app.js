@@ -7,6 +7,9 @@ const photoRoutes = require("./routes/photoRoutes");
 const favoritesRoutes = require("./routes/favoritesRoutes");
 const userRoutes = require("./routes/userRoutes");
 
+// error middleware, sends JSON error response with status code and message, and may include stack trace in dev mode
+const { errorHandler } = require("./middleware/errorMiddleware");
+
 // express app
 const app = express();
 
@@ -22,7 +25,7 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to the Unsplash API!" });
 });
 app.use("/", photoRoutes);
-app.use("/", favoritesRoutes);
+app.use("/", errorHandler, favoritesRoutes);
 app.use("/api/user/", userRoutes);
 
 // server configuration

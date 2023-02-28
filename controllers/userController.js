@@ -1,7 +1,3 @@
-//Import asyncHandler so that we can use it in our routes to trigger error handling middleware
-const asyncHandler = require("express-async-handler");
-
-const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/userModel");
@@ -11,7 +7,7 @@ const createToken = (_id) => {
 };
 
 // signup user
-const signupUser = asyncHandler(async (req, res) => {
+const signupUser = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
@@ -22,10 +18,10 @@ const signupUser = asyncHandler(async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-});
+};
 
 // login user
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -36,16 +32,16 @@ const loginUser = asyncHandler(async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-});
+};
 
 // me router
-const getMe = asyncHandler(async (req, res) => {
+const getMe = async (req, res) => {
   try {
     res.status(200).json(req.user);
   } catch (error) {
     res.json({ message: error });
   }
-});
+};
 
 module.exports = {
   loginUser,
